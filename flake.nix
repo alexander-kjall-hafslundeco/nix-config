@@ -10,6 +10,7 @@
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
+
   let
     configuration = {pkgs, ... }: {
 
@@ -39,7 +40,10 @@
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh.enable = true;
 
-        environment.systemPackages = [ ];
+        environment.systemPackages = [ pkgs.neofetch pkgs.emacs pkgs.git pkgs.cargo pkgs.sequoia-sq pkgs.sequoia-chameleon-gnupg ];
+
+        # enable touch-id for sudo
+        security.pam.enableSudoTouchIdAuth = true;
     };
   in
   {

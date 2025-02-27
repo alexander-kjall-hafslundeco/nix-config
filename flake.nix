@@ -47,13 +47,17 @@
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;
 
-      environment.systemPackages = [ pkgs.neofetch pkgs.emacs pkgs.git pkgs.cargo pkgs.sequoia-sq pkgs.sequoia-chameleon-gnupg rust-toolchain];
+      fonts.packages = [
+        pkgs.nerd-fonts.fira-code
+      ];
+
+      environment.systemPackages = [ pkgs.neofetch pkgs.emacs pkgs.git pkgs.cargo pkgs.sequoia-sq pkgs.sequoia-chameleon-gnupg rust-toolchain pkgs.ripgrep pkgs.bat pkgs.alacritty pkgs.starship pkgs.lsd pkgs.postgresql_17 pkgs.emacsPackages.nix-mode pkgs.bashInteractive pkgs.bash-completion pkgs.nix-bash-completions pkgs.zizmor pkgs.yamllint pkgs.azure-cli ];
 
       # enable touch-id for sudo
-      security.pam.enableSudoTouchIdAuth = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
     };
   in {
-    darwinConfigurations."Alexander-sin-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."MBP-DVTK72MJYW" = nix-darwin.lib.darwinSystem {
       modules = [
         configuration
       ];
